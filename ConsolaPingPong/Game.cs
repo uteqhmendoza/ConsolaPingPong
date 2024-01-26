@@ -9,7 +9,7 @@ namespace ConsolaPingPong
 {
     public class Game
     {
-        private IGameObject tablero;
+        private Tablero tablero;
         private Pelota pelota;
         private Jugador jugadorA;
         private Jugador jugadorB;
@@ -37,6 +37,8 @@ namespace ConsolaPingPong
             jugadorA.PositionY = ((Tablero)tablero).Alto /2 - 1;
             jugadorB.PositionX = ((Tablero)tablero).Ancho - 1;
             jugadorB.PositionY = ((Tablero)tablero).Alto / 2 - 1;
+            pelota.PositionX = jugadorA.PositionX;
+            pelota.PositionY = jugadorA.PositionY;
             jugadorB.KeyDown = ConsoleKey.A;
             jugadorB.KeyUp = ConsoleKey.Q;
 
@@ -77,8 +79,21 @@ namespace ConsolaPingPong
                 pelota.OnDraw();
                 pelota.Move(((Tablero)tablero).Ancho, ((Tablero)tablero).Alto);
                
-                
-                Thread.Sleep(600);
+                if (pelota.PositionX == 1 && pelota.PositionY != jugadorA.PositionY)
+                {
+                    jugadorB.Score = jugadorB.Score + 1;
+                }
+
+                if (pelota.PositionX == tablero.Ancho -1  && pelota.PositionY != jugadorB.PositionY)
+                {
+                    jugadorA.Score = jugadorA.Score + 1;
+                }
+
+                Console.SetCursorPosition(0, tablero.Alto + 2);
+
+                Console.WriteLine($"Score Jugador A: {jugadorA.Score}");
+                Console.WriteLine($"Score Jugador B: {jugadorB.Score}");
+                Thread.Sleep(100);
                 Console.Clear();
 
 

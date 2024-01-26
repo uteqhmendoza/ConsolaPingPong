@@ -28,13 +28,13 @@ namespace ConsolaPingPong
             PositionX += SpeedX;
             PositionY += SpeedY;
 
-            if (PositionX >= maxWidth)
+            if (PositionX >= maxWidth - 1)
                 SpeedX = -1;
 
             if (PositionX <= 1)
                 SpeedX = 1;
 
-            if (PositionY >= maxHight -1)
+            if (PositionY >= maxHight)
                 SpeedY = -1;
 
             if (PositionY <= 1)
